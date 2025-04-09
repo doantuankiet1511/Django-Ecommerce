@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-)o8%5)1mge8()ws2x(jh3%$ze(dqse0f$n-aaq^pvcx#p5l7ol
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,13 +89,14 @@ WSGI_APPLICATION = 'fukiapp.wsgi.application'
 import pymysql
 pymysql.install_as_MySQLdb()
 
-DATABASES = {
+DATABASES ={
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+     'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fukiappdb',
         'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': ''
+        'PASSWORD': '12345678',
+        'HOST': 'fukiapp-rds.cshwtwtdf0dn.ap-southeast-1.rds.amazonaws.com:3306',
+        'PORT': '3306',
     }
 }
 
@@ -127,16 +128,16 @@ AUTH_USER_MODEL = 'shops.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'fukiappdb',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'fukiappdb',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'fukiappdb',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'fukiappdb',
     },
 ]
 
@@ -157,6 +158,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
